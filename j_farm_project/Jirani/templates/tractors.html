@@ -1,4 +1,4 @@
-{% extends 'jirani/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
     <h2>Tractors</h2>
@@ -9,13 +9,13 @@
     {% if tractors %}
         <ul class="tractor-list">
             {% for tractor in tractors %}
-                <li><a href="{% url 'jirani:tractor_detail' tractor.id %}">{{ tractor.model }} ({{ tractor.year }}) - KES {{ tractor.price }} per day</a></li>
+                <li><a href="jirani:tractor_detail, tractor.id">{{ tractor.model }} ({{ tractor.year }}) - KES {{ tractor.price }} per day</a></li>
             {% endfor %}
         </ul>
     {% else %}
         <p>No tractors found.</p>
     {% endif %}
     {% if user.farmer.tractors.count > 0 %}
-        <a href="{% url 'jirani:add_tractor' %}">Add a tractor</a>
+        <a href="jirani:add_tractor">Add a tractor</a>
     {% endif %}
 {% endblock %}

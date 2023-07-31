@@ -1,4 +1,4 @@
-{% extends 'jirani/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
     <h2>Tractor Detail</h2>
@@ -9,9 +9,9 @@
     <p>Owner: {{ tractor.owner.user.username }}</p>
 
     {% if user.farmer == tractor.owner %}
-        <a href="{% url 'jirani:edit_tractor' tractor.id %}">Edit</a>
-        <a href="{% url 'jirani:delete_tractor' tractor.id %}">Delete</a>
+        <a href="jirani:edit_tractor, tractor.id">Edit</a>
+        <a href="jirani:delete_tractor, tractor.id">Delete</a>
     {% elif tractor.available %}
-        <a href="{% url 'jirani:create_lease' tractor.id %}">Lease</a>
+        <a href="jirani:create_lease, tractor.id">Lease</a>
     {% endif %}
 {% endblock %}

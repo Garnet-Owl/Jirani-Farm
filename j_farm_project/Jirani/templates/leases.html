@@ -1,0 +1,7 @@
+    {% if user.farmer == tractor.owner %}
+        <a href="jirani:edit_tractor, tractor.id">Edit</a>
+        <a href="jirani:delete_tractor, tractor.id">Delete</a>
+    {% elif tractor.available %}
+        <a href="jirani:create_lease, tractor.id">Lease</a>
+    {% endif %}
+{% endblock %}

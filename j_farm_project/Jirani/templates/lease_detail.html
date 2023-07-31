@@ -1,4 +1,4 @@
-{% extends 'jirani/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
     <h2>Lease Detail</h2>
@@ -8,10 +8,10 @@
     <p>End date: {{ lease.end_date }}</p>
     <p>Status: {{ lease.status }}</p>
     {% if user.farmer == lease.renter and lease.status == 'pending' %}
-        <a href="{% url 'jirani:cancel_lease' lease.id %}">Cancel</a>
+        <a href="jirani:cancel_lease, lease.id">Cancel</a>
     {% elif user.farmer == lease.tractor.owner and lease.status == 'pending' %}
-        <a href="{% url 'jirani:confirm_lease' lease.id %}">Confirm</a>
+        <a href="jirani:confirm_lease, lease.id ">Confirm</a>
     {% elif user.farmer == lease.tractor.owner and lease.status == 'confirmed' %}
-        <a href="{% url 'jirani:complete_lease' lease.id %}">Complete</a>
+        <a href="jirani:complete_lease, lease.id">Complete</a>
     {% endif %}
 {% endblock %}
