@@ -1,0 +1,11 @@
+{% extends 'jirani/base.html' %}
+
+{% block content %}
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <p><label for="id_username">Username:</label> <input type="text" name="username" id="id_username"></p>
+        <p><label for="id_password">Password:</label> <input type="password" name="password" id="id_password"></p>
+        <input type="submit" value="Login">
+    </form>
+{% endblock %}

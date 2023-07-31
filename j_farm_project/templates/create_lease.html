@@ -1,0 +1,12 @@
+{% extends 'jirani/base.html' %}
+
+{% block content %}
+    <h2>Create a lease</h2>
+    <p>You are about to lease this tractor:</p>
+    <p>{{ tractor.model }} ({{ tractor.year }}) - KES {{ tractor.price }} per day</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ lease_form.as_p }}
+        <input type="submit" value="Create">
+    </form>
+{% endblock %}

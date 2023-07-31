@@ -1,0 +1,21 @@
+{% extends 'jirani/base.html' %}
+
+{% block content %}
+    <h2>Tractors</h2>
+    <form method="get">
+        <input type="text" name="q" placeholder="Search by model">
+        <input type="submit" value="Search">
+    </form>
+    {% if tractors %}
+        <ul class="tractor-list">
+            {% for tractor in tractors %}
+                <li><a href="{% url 'jirani:tractor_detail' tractor.id %}">{{ tractor.model }} ({{ tractor.year }}) - KES {{ tractor.price }} per day</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tractors found.</p>
+    {% endif %}
+    {% if user.farmer.tractors.count > 0 %}
+        <a href="{% url 'jirani:add_tractor' %}">Add a tractor</a>
+    {% endif %}
+{% endblock %}

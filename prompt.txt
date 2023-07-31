@@ -1,0 +1,4 @@
+write python django code for a web application platform that will link small scale farmers to tractors for lease in their locality mainly from other farmers. The goalbeing to enable farmers to mechanize farming without the pressure of buying the machines, since only a few farmers can afford to buy tractors outright.
+separate the code for all the django modules for ease in copying. e.g, models, app urls, project urls, views.py e.tc
+
+include the code for the html templates and css static code for a front end that is modern and sophisticated

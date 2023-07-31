@@ -1,0 +1,10 @@
+{% extends 'jirani/base.html' %}
+
+{% block content %}
+    <h2>Add a tractor</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ tractor_form.as_p }}
+        <input type="submit" value="Add">
+    </form>
+{% endblock %}

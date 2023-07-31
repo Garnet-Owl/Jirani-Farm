@@ -1,0 +1,9 @@
+{% extends 'jirani/base.html' %}
+
+{% block content %}
+    <h2>Profile</h2>
+    <p>Username: {{ farmer.user.username }}</p>
+    <p>Email: {{ farmer.user.email }}</p>
+    <p>Phone: {{ farmer.phone }}</p>
+    <p>Location: {{ farmer.location }}</p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'jirani/base.html' %}
+
+{% block content %}
+    <h2>Cancel a lease</h2>
+    <p>Are you sure you want to cancel this lease?</p>
+    <p>{{ lease.tractor.model }} - {{ lease.renter.user.username }} - {{ lease.status }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Cancel">
+    </form>
+{% endblock %}

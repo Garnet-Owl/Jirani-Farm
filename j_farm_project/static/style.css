@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+}
+
+.header h1 {
+    display: inline-block;
+}
+
+.header p {
+    display: inline-block;
+    float: right;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav {
+    background-color: #333;
+}
+
+.nav ul {
+    list-style-type: none;
+}
+
+.nav li {
+    display: inline-block;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.nav a:hover {
+    background-color: #4CAF50;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content h2 {
+    margin-bottom: 10px;
+}
+
+.content p {
+    margin-bottom: 10px;
+}
+
+.content form {
+    margin-bottom: 10px;
+}
+
+.content form p {
+    margin-bottom: 5px;
+}
+
+.content form input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="date"] {
+    width: 300px;
+}
+
+.content form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+.content form input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+.content ul.tractor-list, ul.lease-list {
+    list-style-type: none;
+}
+
+.content ul.tractor-list li, ul.lease-list li {
+    margin-bottom: 5px;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
