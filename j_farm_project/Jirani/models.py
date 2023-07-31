@@ -25,7 +25,7 @@ class Tractor(models.Model):
 
 
 class Lease(models.Model):
-    objects = None
+
     tractor = models.ForeignKey(Tractor, on_delete=models.CASCADE, related_name='leases')
     renter = models.ForeignKey(Farmer, on_delete=models.CASCADE, related_name='leases')
     start_date = models.DateField()

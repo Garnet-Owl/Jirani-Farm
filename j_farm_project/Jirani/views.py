@@ -1,16 +1,18 @@
 from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
+
 from .forms import UserForm, FarmerForm, TractorForm, LeaseForm
-from .models import Tractor, Lease
+from .models import Tractor, Lease, Farmer
 
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'jirani/templates/index.html')
+    return render(request, 'index.html', )
 
 
 def register(request):
@@ -28,11 +30,11 @@ def register(request):
             return redirect('jirani:login')
         else:
             messages.error(request, 'Registration failed.')
-            return render(request, 'jirani/templates/register.html', {'user_form': user_form, 'farmer_form': farmer_form})
+            return render(request, 'register.html', {'user_form': user_form, 'farmer_form': farmer_form})
     else:
         user_form = UserForm()
         farmer_form = FarmerForm()
-        return render(request, 'jirani/templates/register.html', {'user_form': user_form, 'farmer_form': farmer_form})
+        return render(request, 'register.html', {'user_form': user_form, 'farmer_form': farmer_form})
 
 
 def login_user(request):
@@ -46,9 +48,9 @@ def login_user(request):
             return redirect('jirani:index')
         else:
             messages.error(request, 'Login failed.')
-            return render(request, 'jirani/templates/login.html')
+            return render(request, 'login.html')
     else:
-        return render(request, 'jirani/templates/login.html')
+        return render(request, 'login.html')
 
 
 @login_required
@@ -61,7 +63,7 @@ def logout_user(request):
 @login_required
 def profile(request):
     farmer = request.user.farmer
-    return render(request, 'jirani/templates/profile.html', {'farmer': farmer})
+    return render(request, 'profile.html', {'farmer': farmer})
 
 
 @login_required
@@ -71,13 +73,13 @@ def tractors(request):
         tractors = Tractor.objects.filter(model__icontains=query, available=True)
     else:
         tractors = Tractor.objects.filter(available=True)
-    return render(request, 'jirani/templates/tractors.html', {'tractors': tractors})
+    return render(request, 'tractors.html', {'tractors': tractors})
 
 
 @login_required
 def tractor_detail(request, tractor_id):
     tractor = get_object_or_404(Tractor, id=tractor_id)
-    return render(request, 'jirani/templates/tractor_detail.html', {'tractor': tractor})
+    return render(request, 'tractor_detail.html', {'tractor': tractor})
 
 
 @login_required
@@ -92,10 +94,10 @@ def add_tractor(request):
             return redirect('jirani:tractors')
         else:
             messages.error(request, 'Tractor not added.')
-            return render(request, 'jirani/templates/add_tractor.html', {'tractor_form': tractor_form})
+            return render(request, 'add_tractor.html', {'tractor_form': tractor_form})
     else:
         tractor_form = TractorForm()
-        return render(request, 'jirani/templates/add_tractor.html', {'tractor_form': tractor_form})
+        return render(request, 'add_tractor.html', {'tractor_form': tractor_form})
 
 
 @login_required
@@ -110,10 +112,10 @@ def edit_tractor(request, tractor_id):
                 return redirect('jirani:tractors')
             else:
                 messages.error(request, 'Tractor not updated.')
-                return render(request, 'jirani/templates/edit_tractor.html', {'tractor_form': tractor_form})
+                return render(request, 'edit_tractor.html', {'tractor_form': tractor_form})
         else:
             tractor_form = TractorForm(instance=tractor)
-            return render(request, 'jirani/templates/edit_tractor.html', {'tractor_form': tractor_form})
+            return render(request, 'edit_tractor.html', {'tractor_form': tractor_form})
     else:
         messages.error(request, 'You are not authorized to edit this tractor.')
         return redirect('jirani:tractors')
@@ -128,7 +130,7 @@ def delete_tractor(request, tractor_id):
             messages.success(request, 'Tractor deleted.')
             return redirect('jirani:tractors')
         else:
-            return render(request, 'jirani/templates/delete_tractor.html', {'tractor': tractor})
+            return render(request, 'delete_tractor.html', {'tractor': tractor})
     else:
         messages.error(request, 'You are not authorized to delete this tractor.')
         return redirect('jirani:tractors')
@@ -137,14 +139,14 @@ def delete_tractor(request, tractor_id):
 @login_required
 def leases(request):
     leases = Lease.objects.filter(renter=request.user.farmer) | Lease.objects.filter(tractor__owner=request.user.farmer)
-    return render(request, 'jirani/templates/leases.html', {'leases': leases})
+    return render(request, 'leases.html', {'leases': leases})
 
 
 @login_required
 def lease_detail(request, lease_id):
     lease = get_object_or_404(Lease, id=lease_id)
     if request.user.farmer == lease.renter or request.user.farmer == lease.tractor.owner:
-        return render(request, 'jirani/templates/lease_detail.html', {'lease': lease})
+        return render(request, 'lease_detail.html', {'lease': lease})
     else:
         messages.error(request, 'You are not authorized to view this lease.')
         return redirect('jirani:leases')
@@ -165,10 +167,10 @@ def create_lease(request, tractor_id):
                 return redirect('jirani:leases')
             else:
                 messages.error(request, 'Lease not created.')
-                return render(request, 'jirani/templates/create_lease.html', {'lease_form': lease_form})
+                return render(request, 'create_lease.html', {'lease_form': lease_form})
         else:
             lease_form = LeaseForm()
-            return render(request, 'jirani/templates/create_lease.html', {'lease_form': lease_form})
+            return render(request, 'create_lease.html', {'lease_form': lease_form})
     else:
         messages.error(request, 'You cannot lease this tractor.')
         return redirect('jirani:tractors')
@@ -184,7 +186,7 @@ def cancel_lease(request, lease_id):
             messages.success(request, 'Lease cancelled.')
             return redirect('jirani:leases')
         else:
-            return render(request, 'jirani/templates/cancel_lease.html', {'lease': lease})
+            return render(request, 'cancel_lease.html', {'lease': lease})
     else:
         messages.error(request, 'You cannot cancel this lease.')
         return redirect('jirani:leases')
@@ -202,7 +204,7 @@ def confirm_lease(request, lease_id):
             messages.success(request, 'Lease confirmed.')
             return redirect('jirani:leases')
         else:
-            return render(request, 'jirani/templates/confirm_lease.html', {'lease': lease})
+            return render(request, 'confirm_lease.html', {'lease': lease})
     else:
         messages.error(request, 'You cannot confirm this lease.')
         return redirect('jirani:leases')
@@ -220,7 +222,7 @@ def complete_lease(request, lease_id):
             messages.success(request, 'Lease completed.')
             return redirect('jirani:leases')
         else:
-            return render(request, 'jirani/templates/complete_lease.html', {'lease': lease})
+            return render(request, 'complete_lease.html', {'lease': lease})
     else:
         messages.error(request, 'You cannot complete this lease.')
         return redirect('jirani:leases')
