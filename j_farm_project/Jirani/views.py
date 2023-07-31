@@ -12,7 +12,8 @@ from .models import Tractor, Lease, Farmer
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html', )
+
+    return render(request, 'index.html', {1})
 
 
 def register(request):

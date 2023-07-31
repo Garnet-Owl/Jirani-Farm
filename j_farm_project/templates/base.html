@@ -1,28 +1,29 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Jirani - A platform for farmers to rent tractors</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><a href="jirani:index">Jirani</a></h1>
+            <h1><a href="{% url 'jirani:index' %}">Jirani</a></h1>
             <p>A platform for farmers to rent tractors</p>
         </div>
         <div class="nav">
             {% if user.is_authenticated %}
                 <ul>
-                    <li><a href="jirani:profile">Profile</a></li>
-                    <li><a href="jirani:tractors">Tractors</a></li>
-                    <li><a href="jirani:leases">Leases</a></li>
-                    <li><a href="jirani:logout">Logout</a></li>
+                    <li><a href="{% url 'jirani:profile' %}">Profile</a></li>
+                    <li><a href="{% url 'jirani:tractors' %}">Tractors</a></li>
+                    <li><a href="{% url 'jirani:leases' %}">Leases</a></li>
+                    <li><a href="{% url 'jirani:logout' %}">Logout</a></li>
                 </ul>
             {% else %}
                 <ul>
-                    <li><a href="jirani:register">Register</a></li>
-                    <li><a href="jirani:login">Login</a></li>
+                    <li><a href="{% url 'jirani:register' %}">Register</a></li>
+                    <li><a href="{% url 'jirani:login' %}">Login</a></li>
                 </ul>
             {% endif %}
         </div>
