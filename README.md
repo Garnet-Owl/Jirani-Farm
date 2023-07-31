@@ -1,4 +1,3 @@
 # Jirani-Farm
 #A django web application project.
-A web platform for linking farmers to tractors in their area for lease
-A platform to find farmers find available tractors and other farming machineries for hire and vice versa
+A platform where farmers can find tractors and other farming machineries available for hire in their locality and vice versa.
