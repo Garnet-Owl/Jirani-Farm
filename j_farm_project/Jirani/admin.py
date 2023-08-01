@@ -13,6 +13,6 @@ class TractorAdmin(admin.ModelAdmin):
 class LeaseAdmin(admin.ModelAdmin):
     list_display = ('start_date', 'end_date', 'status', 'tractor', 'renter')
 
-admin.site.register(Farmer, FarmerAdmin)
-admin.site.register(Tractor, TractorAdmin)
-admin.site.register(Lease, LeaseAdmin)
+admin.site.register(Farmer, FarmerAdmin),
+admin.site.register(Tractor, TractorAdmin),
+admin.site.register(Lease, LeaseAdmin),

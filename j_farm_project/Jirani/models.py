@@ -16,7 +16,7 @@ class Farmer(models.Model):
 class Tractor(models.Model):
     owner = models.ForeignKey(Farmer, on_delete=models.CASCADE, related_name='tractors')
     model = models.CharField(max_length=50)
-    year = models.IntegerField()
+    year = models.IntegerField( default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
 
